@@ -16,3 +16,8 @@ git config --global -e
  git config --global core.autocrlf input
 
  git branch -m main master // para cambiar el nombre de la rama
+
+ git config --global push.default current
+
+ git config --global core.editor "code --wait"
+ 
