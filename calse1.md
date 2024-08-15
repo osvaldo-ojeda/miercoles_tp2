@@ -8,6 +8,7 @@ git config --global -l
 
 git config --global -e
 
+
 ### para windows
  git config --global core.autocrlf true
 
