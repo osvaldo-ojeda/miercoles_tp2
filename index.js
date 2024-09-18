@@ -1,14 +1,61 @@
-const decirHola= require("./funciones/decirHola")
-const numeroMayor=require("./funciones/numeroMayor")
-const sumaNumeros = require("./sumaNumeros")
-const abbrevName=require("./funciones/abbrevName")
-const oneProperty=require("./funciones/oneProperty")
+function inicio() {
+  console.log("inicio");
+}
 
+function time() {
+  setTimeout(() => {
+    console.log("time");
+  }, 1000);
+}
 
-// // decirHola()
-// numeroMayor([4,6,2,1])
-// sumaNumeros([10, 5, 20, 15])
-// abbrevName("sam harris ojeda") 
-let arreglo = [ { name: "Kuka", edad:3 }, { name: "Canela", edad:4 } ]
-oneProperty(arreglo, "edad") 
-oneProperty(arreglo, "name")
+function promesa(boolean) {
+  return new Promise((resolve, reject) => {
+    if (boolean) {
+      return resolve("promesa ok");
+    } else {
+      reject("promesa no ok");
+    }
+  });
+}
+
+function jsonPlaceHolder() {
+  return fetch("https://jsonplaceholder.typicode.com/todo/1");
+  //     .then((response) => response.json())
+  //     .then((json) => console.log(json));
+}
+
+async function rm() {
+  try {
+    const data = await fetch("https://rickandmortyapi.com/api");
+    const dataJson = await data.json();
+    console.log(`🚀 ~ rm ~ data:`, dataJson);
+    //     return dataJson
+  } catch (error) {
+    console.log(`🚀 ~ rm ~ error:`, error);
+  }
+}
+
+function fin() {
+  console.log("fin");
+}
+
+inicio();
+time();
+// console.log(promesa(true))
+promesa(true)
+  .then((data) => console.log(data))
+  .catch((error) => console.log(error))
+  .finally(() => console.log("final de la promesa"));
+jsonPlaceHolder()
+  .then((response) => {
+    if (response.statusText != "OK") {
+      throw "error en jsonplaceholder";
+    }
+    return response.json();
+  })
+  .then((data) => console.log(data))
+  .catch((error) => console.log(error));
+
+// console.log(rm())
+rm();
+fin();
