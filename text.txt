@@ -1,0 +1,7 @@
+Error: ENOENT: no such file or directory, open './package.jso'
+Error: ENOENT: no such file or directory, open './package.jso'
+Error: ENOENT: no such file or directory, open './package.jso'
+Error: ENOENT: no such file or directory, open './package.jso'
+Error: ENOENT: no such file or directory, open './package.jso'
+Error: ENOENT: no such file or directory, open './package.jso'
+Error: ENOENT: no such file or directory, open './package.jso'

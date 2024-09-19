@@ -1,61 +1,35 @@
-function inicio() {
-  console.log("inicio");
-}
+// const fs = require("node:fs")
+import fs from "node:fs";
+// console.log(`🚀 ~ fs:`, fs)
 
-function time() {
-  setTimeout(() => {
-    console.log("time");
-  }, 1000);
-}
+// function readFile() {
+//   try {
+//     const file = fs.readFileSync("./package.json", "utf-8");
+//     console.log(`🚀 ~ readFile ~ file:`, file);
+//   } catch (error) {
+//     console.log(`🚀 ~ readFile ~ error:`, error.message);
+//   }
+// }
 
-function promesa(boolean) {
-  return new Promise((resolve, reject) => {
-    if (boolean) {
-      return resolve("promesa ok");
-    } else {
-      reject("promesa no ok");
-    }
-  });
-}
-
-function jsonPlaceHolder() {
-  return fetch("https://jsonplaceholder.typicode.com/todo/1");
-  //     .then((response) => response.json())
-  //     .then((json) => console.log(json));
-}
-
-async function rm() {
+async function readFile() {
   try {
-    const data = await fetch("https://rickandmortyapi.com/api");
-    const dataJson = await data.json();
-    console.log(`🚀 ~ rm ~ data:`, dataJson);
-    //     return dataJson
+    const file = await fs.promises.readFile("./package.jso", "utf-8");
+    console.log(`🚀 ~ readFile ~ file:`, file);
+    //     return file;
   } catch (error) {
-    console.log(`🚀 ~ rm ~ error:`, error);
+    console.log(`🚀 ~ readFile ~ error:`, error.message);
+    await appendFile(error)
   }
 }
 
-function fin() {
-  console.log("fin");
+async function appendFile(params) {
+  try {
+    await fs.promises.appendFile("text.txt", `${params}\n`);
+  } catch (error) {
+    console.log(`🚀 ~ appendFile ~ error:`, error);
+    await fs.promises.appendFile("error.txt", `${error}\n`);
+  }
 }
 
-inicio();
-time();
-// console.log(promesa(true))
-promesa(true)
-  .then((data) => console.log(data))
-  .catch((error) => console.log(error))
-  .finally(() => console.log("final de la promesa"));
-jsonPlaceHolder()
-  .then((response) => {
-    if (response.statusText != "OK") {
-      throw "error en jsonplaceholder";
-    }
-    return response.json();
-  })
-  .then((data) => console.log(data))
-  .catch((error) => console.log(error));
-
-// console.log(rm())
-rm();
-fin();
+readFile();
+// appendFile("hola");
