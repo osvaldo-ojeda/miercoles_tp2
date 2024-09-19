@@ -1,35 +1,14 @@
-// const fs = require("node:fs")
-import fs from "node:fs";
-// console.log(`🚀 ~ fs:`, fs)
+// console.log(process.argv);
+import { stdin, stdout } from "node:process";
+// console.log(`🚀 ~ stdin:`, stdin)
 
-// function readFile() {
-//   try {
-//     const file = fs.readFileSync("./package.json", "utf-8");
-//     console.log(`🚀 ~ readFile ~ file:`, file);
-//   } catch (error) {
-//     console.log(`🚀 ~ readFile ~ error:`, error.message);
-//   }
-// }
+stdout.write("$> ");
 
-async function readFile() {
-  try {
-    const file = await fs.promises.readFile("./package.jso", "utf-8");
-    console.log(`🚀 ~ readFile ~ file:`, file);
-    //     return file;
-  } catch (error) {
-    console.log(`🚀 ~ readFile ~ error:`, error.message);
-    await appendFile(error)
+stdin.on("data", (params) => {
+  const commands = params.toString().trim();
+  if (commands === "pwd") {
+    const pwd = process.argv[1];
+    stdout.write(`${pwd}\n`);
   }
-}
-
-async function appendFile(params) {
-  try {
-    await fs.promises.appendFile("text.txt", `${params}\n`);
-  } catch (error) {
-    console.log(`🚀 ~ appendFile ~ error:`, error);
-    await fs.promises.appendFile("error.txt", `${error}\n`);
-  }
-}
-
-readFile();
-// appendFile("hola");
+  stdout.write("$> ");
+});
