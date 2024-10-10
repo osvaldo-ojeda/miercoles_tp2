@@ -1,4 +1,0 @@
-- usando los metodos http, hacer un crud de usuarios y lo vamos a manejar en un array de objetos
-- manejar un id auto incremental 
-- agregar bloque try catch a las consultas
-- asignar el status code correcto a cada consulta
