@@ -1,15 +1,11 @@
 import { Router } from "express";
 import userRoutes from "./userRoutes.js";
-import rolesRoutes from "./rolesRoutes.js";
+import { logger } from "../midlewares/logger.js";
 
 const routes = Router();
 
-// routes.get("/", (req, res)=>{
-//      res.send("res desde routes")
-// })
-
-routes.use("/roles", rolesRoutes);
-
-routes.use("/users", userRoutes);
+routes.use("/user", userRoutes);
+// routes.use("/roles",rolesRoutes);
+// routes.use("/product",productRoutes);
 
 export default routes;

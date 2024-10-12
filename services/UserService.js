@@ -1,18 +1,33 @@
+import {User, Role} from "../models/index.js"
+
 class UserService {
   getAllUsersService = async () => {
-    return "getAllUserService";
+    try {
+      const data = await User.findAll({
+        attributes:["name"],
+        include:Role
+      });
+      return data;
+    } catch (error) {
+      throw error;
+    }
   };
-  getUserByIdService = async (id) => {
-    return `getUserByIdService ${id}`;
+  getUserByIdService = (id) => {
+    return "get user by id service";
   };
-  createUserService = async (name, password) => {
-    return `createUserService ${name} ${password}`;
+  createUserService = async (userData) => {
+    try {
+      const data = await User.create(userData);
+      return data;
+    } catch (error) {
+      throw error;
+    }
   };
-  updateUserService = async (name,password ) => {
-    return `updateUserService ${name, password}`;
+  updateUserService = (id) => {
+    return "update user service";
   };
-  deleteUserService = async (id) => {
-    return `deleteUserService ${id}`;
+  deleteUserService = (id) => {
+    return "delete user service";
   };
 }
 
