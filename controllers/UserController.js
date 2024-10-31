@@ -2,13 +2,6 @@ import UserService from "../services/UserService.js";
 class UserController {
   userService = new UserService();
   getAllUsers = async (req, res) => {
-    //     try {
-    //       res
-    //         .status(200)
-    //         .send({ success: true, message: "res desde getAllUsers " });
-    //     } catch (error) {
-    //       res.status(400).send({ success: false, message: error.message });
-    //     }
     try {
       const data = await this.userService.getAllUsersService();
       res.status(200).send({ success: true, message: data });
@@ -27,10 +20,13 @@ class UserController {
     }
   };
   createUser = async (req, res, next) => {
-    console.log(`🚀 ~ UserController ~ createUser= ~ req:`, req.body);
     try {
-      const { name, password } = req.body;
-      const data = await this.userService.createUserService(name, password);
+      const { name, mail, pass } = req.body;
+      const data = await this.userService.createUserService({
+        name,
+        mail,
+        pass,
+      });
       res.status(200).send({ success: true, message: data });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
@@ -38,9 +34,10 @@ class UserController {
   };
   updateUser = async (req, res) => {
     try {
-      const { name, passwors } = req.body;
+      const { name, pass, mail} = req.body;
+      console.log(`🚀 ~ UserController ~ updateUser= ~ pass:`, pass)
       const { id } = req.params;
-      const data = await this.userService.updateUserService(id, name, passwors);
+      const data = await this.userService.updateUserService({id, name, pass, mail});
       res.status(200).send({ success: true, message: data });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });

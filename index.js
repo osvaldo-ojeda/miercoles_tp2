@@ -1,41 +1,25 @@
-// imports
 import express from "express";
 import routes from "./routes/routes.js";
-import { getDate } from "./midlewares/getDate.js";
-import {notFound} from "./midlewares/notFound.js"
-import morgan from "morgan"
-// console.log(`🚀 ~ express:`, express)
+import { notFound } from "./midlewares/notFound.js";
+import connection from "./connection/connection.js";
+// import User from "./models/User.js";
+// import Role from "./models/Role.js";
 
 // crear el server
 const app = express();
 
 // ---------------
 // fundamentales
-app.use(express.urlencoded({extended:true}))
-app.use(express.json())
-app.use(morgan("tiny"))
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 // midlewares
-function logger(req, res, next) {
-     console.log(`🚀 ~ logger ~ req:`, req.url);
-     next();
-}
-app.use(logger);
 
-app.use(function (req, res, next) {
-     console.log(`🚀 ~ Method:`, req.method);
-     next();
-});
+app.use("/app", routes);
 
+app.use(notFound);
 
-// ---------------
-// rutas
+connection.sync({ force: false});
 
-app.use("/app", getDate, routes);
-
-app.use(notFound)
-
-// listen
 app.listen(8000, () => {
   console.log(`🚀 ~ app.listen ~ listen: on port 8000`);
 });
-

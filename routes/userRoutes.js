@@ -5,9 +5,6 @@ const userRoutes = Router();
 
 const userController = new UserController();
 
-// userRoutes.get("/", (req, res)=>{
-//      res.send("res desde userRoutes")
-// })
 userRoutes.get("/",  userController.getAllUsers);
 userRoutes.get("/:id", userController.getUserById);
 userRoutes.post("/", userController.createUser);
