@@ -32,6 +32,18 @@ class UserController {
       res.status(400).send({ success: false, message: error.message });
     }
   };
+  login = async (req, res, next) => {
+    try {
+      const {mail, pass } = req.body;
+      const data = await this.userService.loginService({
+        mail,
+        pass,
+      });
+      res.status(200).send({ success: true, message: data });
+    } catch (error) {
+      res.status(400).send({ success: false, message: error.message });
+    }
+  };
   updateUser = async (req, res) => {
     try {
       const { name, pass, mail} = req.body;

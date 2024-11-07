@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize";
+import  { DB_NAME, DB_DIALECT, DB_HOST, DB_PASS, DB_PORT, DB_USER} from "../config/config.js"
 
-const connection = new Sequelize("miercoles", "root", "", {
+const connection = new Sequelize(DB_NAME,DB_USER , DB_PASS, {
   host: "localhost",
   dialect: "mysql",
   port: 3306,
