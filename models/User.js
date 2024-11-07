@@ -19,6 +19,7 @@ User.init(
     mail: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique:true
     },
     pass: {
       type: DataTypes.STRING,

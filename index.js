@@ -18,7 +18,7 @@ app.use("/app", routes);
 
 app.use(notFound);
 
-await connection.sync({ alter: true });
+await connection.sync({ force: true });
 // await roleSeed()
 
 app.listen(SERVER_PORT, () => {
