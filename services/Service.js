@@ -12,18 +12,32 @@ class Service {
       throw error;
     }
   };
-  // getUserByIdService = async (id) => {
-  //   return `getUserByIdService ${id}`;
-  // };
-  // createUserService = async (name, password) => {
-  //   return `createUserService ${name} ${password}`;
-  // };
-  // updateUserService = async (name,password ) => {
-  //   return `updateUserService ${name, password}`;
-  // };
-  // deleteUserService = async (id) => {
-  //   return `deleteUserService ${id}`;
-  // };
+  getPalabrasApiService = async (cantidad) => {
+    try {
+      const data = this.model.getFrase();
+      const frase = data.map((palabra) => palabra.palabra)
+
+      const api= await fetch(`https://texto.deno.dev/palabras?cantidad=${cantidad}`)
+      const apiJson=await api.json()
+
+      return [...apiJson.palabras, ...frase];
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  createService = async (palabra) => {
+    try {
+      if (!palabra) throw new Error("Tenes que ingresar una palabra");
+
+      const frase = this.model.create(palabra)
+      return frase;
+
+    } catch (error) {
+      throw error;
+    }
+  };
+
 }
 
 export default Service;
